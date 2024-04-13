@@ -17,16 +17,10 @@ import javax.imageio.ImageIO;
  */
 public class Imagen {
     //me permite trabajar con los datos de la imagen
-    private BufferedImage imagen;
     private String  rutaImagen;
 
-    public Imagen(BufferedImage imagen, String rutaImagen) {
-        this.imagen = imagen;
+    public Imagen(String rutaImagen) {
         this.rutaImagen = rutaImagen;
-    }
-
-    public BufferedImage getImagen() {
-        return imagen;
     }
 
     public String getRutaImagen() {
@@ -49,24 +43,4 @@ public class Imagen {
         return false;
     }
     
-    public static List<Imagen> cargarDesdeDirectorio(String rutaDirectorio){
-        File directorio= new File(rutaDirectorio);
-        //lista de los archivos 
-        File[] files= directorio.listFiles();
-        List<Imagen> imagenes = new ArrayList<>();
-        
-        if (files !=null){
-            for(File file: files){
-                try {
-                    if(tipoImagen(file)){
-                        BufferedImage imagen = ImageIO.read(file);
-                        imagenes.add(new Imagen(imagen, file.getAbsolutePath()));
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        return imagenes;
-    }
 }

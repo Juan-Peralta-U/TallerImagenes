@@ -3,9 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Juan/Desktop/Coding%20Projects/PA/TallerImagenes/src/Vista/V</file>
-            <file>file:/C:/Users/Juan/Desktop/Coding%20Projects/PA/TallerImagenes/src/Model/M</file>
-            <file>file:/C:/Users/Juan/Desktop/Coding%20Projects/PA/TallerImagenes/src/Controlador/C</file>
+            <file>file:/C:/Users/Juan/Desktop/Coding%20Projects/PA/TallerImagenes/src/Controlador/Launcher.java</file>
+            <file>file:/C:/Users/Juan/Desktop/Coding%20Projects/PA/TallerImagenes/src/Model/Imagen.java</file>
+            <file>file:/C:/Users/Juan/Desktop/Coding%20Projects/PA/TallerImagenes/src/Vista/VentanaPrincipal.java</file>
+            <file>file:/C:/Users/Juan/Desktop/Coding%20Projects/PA/TallerImagenes/src/Controlador/GestorImagen.java</file>
+            <file>file:/C:/Users/Juan/Desktop/Coding%20Projects/PA/TallerImagenes/src/Controlador/Control.java</file>
+            <file>file:/C:/Users/Juan/Desktop/Coding%20Projects/PA/TallerImagenes/src/Vista/DirectoryChooser.java</file>
+            <file>file:/C:/Users/Juan/Desktop/Coding%20Projects/PA/TallerImagenes/src/Vista/VisorImagen.java</file>
         </group>
     </open-files>
 </project-private>

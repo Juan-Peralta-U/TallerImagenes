@@ -21,7 +21,7 @@ import javax.swing.ScrollPaneLayout;
 public class VentanaPrincipal extends javax.swing.JFrame {
     /**
      * Creates new form VentanaPrincipal
-     */
+     */    
     public ArrayList<JButton> btnImagenes;
     
     public VentanaPrincipal() {
@@ -47,12 +47,15 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         btnSalir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         btnBuscar.setBackground(new java.awt.Color(72, 191, 139));
         btnBuscar.setFont(new java.awt.Font("Nirmala UI", 1, 14)); // NOI18N
         btnBuscar.setForeground(new java.awt.Color(7, 39, 29));
         btnBuscar.setText("Buscar directorio");
+        btnBuscar.setActionCommand("buscarDirectorioBtn");
         btnBuscar.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204)));
+        btnBuscar.setName(""); // NOI18N
 
         labTitulo.setFont(new java.awt.Font("Nirmala UI", 3, 27)); // NOI18N
         labTitulo.setForeground(new java.awt.Color(15, 69, 51));
@@ -70,6 +73,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         btnSalir.setFont(new java.awt.Font("Nirmala UI", 1, 14)); // NOI18N
         btnSalir.setForeground(new java.awt.Color(7, 39, 29));
         btnSalir.setText("Salir");
+        btnSalir.setActionCommand("salirBtn");
         btnSalir.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204)));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -110,16 +114,20 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     public void agregarImagen(String ruta){
         int tamaño = 180;
            
-        ImageIcon imagen = new ImageIcon(getClass().getResource(ruta));
+        ImageIcon imagen = new ImageIcon(ruta);
         Image imagenEscalada = imagen.getImage().getScaledInstance(tamaño, tamaño, Image.SCALE_SMOOTH);
         imagen = new ImageIcon(imagenEscalada);
         JButton imageButton= new JButton(imagen);
         
-        imageButton.setActionCommand("BotonImg"+btnImagenes.size());
+        imageButton.setActionCommand("BotonImg" + (btnImagenes.size()));
         btnImagenes.add(imageButton);
-        //imageButton.setActionCommand("BotonImg"+btnImagenes.size()); // Empieza en 1??
         
         imgPanel.add(imageButton);
+        
+        imgPanel.revalidate();
+        
+        imgPanel.repaint();
+        
     }
     
     public void mensajeConsola(String m){
