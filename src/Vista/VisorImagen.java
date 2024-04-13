@@ -4,6 +4,7 @@
  */
 package Vista;
 
+import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -45,24 +46,26 @@ public class VisorImagen extends javax.swing.JFrame {
         barraProgreso.setValue(40);
         barraProgreso.setStringPainted(true);
 
-        labImagen.setText("imagen");
-
         btnDetener.setBackground(new java.awt.Color(255, 204, 102));
         btnDetener.setFont(new java.awt.Font("Nirmala UI", 1, 14)); // NOI18N
         btnDetener.setForeground(new java.awt.Color(7, 39, 29));
         btnDetener.setText("Detener");
+        btnDetener.setActionCommand("detenerBtn");
         btnDetener.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204)));
 
         btnContinuar.setBackground(new java.awt.Color(255, 204, 102));
         btnContinuar.setFont(new java.awt.Font("Nirmala UI", 1, 14)); // NOI18N
         btnContinuar.setForeground(new java.awt.Color(7, 39, 29));
         btnContinuar.setText("Continuar");
+        btnContinuar.setActionCommand("continuarBtn");
         btnContinuar.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204)));
+        btnContinuar.setEnabled(false);
 
         btnSalir.setBackground(new java.awt.Color(255, 204, 102));
         btnSalir.setFont(new java.awt.Font("Nirmala UI", 1, 14)); // NOI18N
         btnSalir.setForeground(new java.awt.Color(7, 39, 29));
         btnSalir.setText("Salir");
+        btnSalir.setActionCommand("salirBtn");
         btnSalir.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204)));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -107,8 +110,20 @@ public class VisorImagen extends javax.swing.JFrame {
 
 
     public void cambiarImagen(String rutaImg, int valorPB){ // valor Progress Bar
-        labImagen = new JLabel(new ImageIcon(getClass().getResource(rutaImg)));
+        int tamaño = 500;
+        
+        ImageIcon imagen = new ImageIcon(rutaImg);
+        
+        Image imagenEscalada = imagen.getImage().getScaledInstance(tamaño, tamaño, Image.SCALE_SMOOTH);
+
+        imagen = new ImageIcon(imagenEscalada);
+
+        
+        labImagen.setIcon(imagen);   
+        
         barraProgreso.setValue(valorPB);
+        labImagen.revalidate();
+        labImagen.repaint();
     }
     
     public void mensajeConsola(String msj){

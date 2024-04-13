@@ -48,9 +48,19 @@ public class GestorImagen {
     }
     
     
+    public int getSize(){
+        return imagenes.size();
+    }
+    
     public String getImagenIndex(int i){
         
         return imagenes.get(i).getRutaImagen();
+    }
+
+    int getPorcentaje(int index) {
+        
+       return ((100 / imagenes.size()) * (index + 1));
+       
     }
     
     

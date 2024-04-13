@@ -23,9 +23,6 @@ public class Control implements ActionListener{
         gestorImagen = new GestorImagen();
         view = new VentanaPrincipal();        
         iniciarVista();
-        
-        
-        
     }
     
     private void iniciarVista(){
@@ -53,7 +50,7 @@ public class Control implements ActionListener{
             
             int indexBtn = Integer.parseInt(index);
              
-            view.mensajeConsola(gestorImagen.getImagenIndex(indexBtn));
+            HiloVisor hiloNuevo = new HiloVisor(indexBtn, gestorImagen);
             
             return;
         }
