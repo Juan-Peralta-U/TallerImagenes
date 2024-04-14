@@ -4,11 +4,13 @@
  */
 package Controlador;
 
+import Model.Imagen;
 import Vista.VisorImagen;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -21,27 +23,23 @@ public class HiloVisor implements ActionListener, Runnable {
     private VisorImagen visorImagen;
     private GestorImagen gestorImagen;
     private int indexImg;
-    private boolean detenido = false; // bandera para detener el hilo
+    private boolean detenido = false; // Bandera para detener el hilo
     private boolean enEjecucion = true;
 
     public HiloVisor(int index, GestorImagen gestorImagen) {
         indexImg = index;
         this.gestorImagen = gestorImagen;
-        visorImagen = new VisorImagen();
-        iniciarVista();
 
         t = new Thread(this);
-        t.start();
-        
+        visorImagen = new VisorImagen();
     }
 
     @Override
     public void run() {
-        visorImagen.ventanaEmergente("Imagen seleccionada: " + gestorImagen.getImagenIndex(indexImg) + "\n"
-                                    + "ID del Hilo a ejecutar: " + Thread.currentThread().getId());
-        while (enEjecucion) { // bucle hasta que se detenga el hilo
+        
+        while (enEjecucion) { // Bucle hasta que se detenga el hilo
             
-            synchronized (monitor) {
+            synchronized (monitor) { // Usa un objeto monitor para bloquear hilo en entorno sincronizado
                 if (detenido) {
                     try {
                         monitor.wait(); // Espera aquí hasta que se notifique
@@ -50,6 +48,7 @@ public class HiloVisor implements ActionListener, Runnable {
                     }
                 }
             }
+            
             cambiarImagen();
             try {
                 Thread.sleep(2000);
@@ -61,30 +60,30 @@ public class HiloVisor implements ActionListener, Runnable {
 
     private void cambiarImagen() {
         int progressBar = gestorImagen.getPorcentaje(indexImg);
-        String ruta = gestorImagen.getImagenIndex(indexImg);
-        visorImagen.cambiarImagen(ruta, progressBar);
+        Imagen img = gestorImagen.getImagenIndex(indexImg);
+        visorImagen.cambiarImagen(img.getIcono(), progressBar);
         indexImg = (indexImg < gestorImagen.getSize() - 1) ? indexImg + 1 : 0;
-        visorImagen.mensajeConsola(ruta);
+        visorImagen.mensajeConsola(img.getRutaImagen());
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        
         switch (e.getActionCommand()) {
             case "detenerBtn":
                 
                 detenido = true; // detener el hilo estableciendo la bandera en true
-                visorImagen.ventanaEmergente("Pausar ejecución Hilo ID: " + Thread.currentThread().getId());
+                visorImagen.ventanaEmergente("Pausar ejecución Hilo ID: " + t.threadId());
                 visorImagen.btnDetener.setEnabled(false);
                 visorImagen.btnContinuar.setEnabled(true);
 
                 break;
 
             case "continuarBtn":
-                visorImagen.ventanaEmergente("Hilo ID: " + Thread.currentThread().threadId() + ". ¿Está vivo?: " + Thread.currentThread().isAlive() + "\n"
-                                            + "Continua ejecución de hilo " + Thread.currentThread().getId());
+                visorImagen.ventanaEmergente("Hilo ID: " + t.threadId() + ". ¿Está vivo?: " + Thread.currentThread().isAlive() + "\n"
+                                            + "Continua ejecución de hilo " + t.threadId());
                 synchronized (monitor) {
-                    detenido = false; // reanudar el hilo estableciendo la bandera en false
+                    detenido = false; // Reanudar el hilo estableciendo la bandera en false
                     monitor.notify();
                 }
 
@@ -93,7 +92,7 @@ public class HiloVisor implements ActionListener, Runnable {
                 break;
             case "salirBtn":
                 enEjecucion=false;
-                visorImagen.ventanaEmergente("Ejecución terminada Hilo ID: " + Thread.currentThread().getId());
+                visorImagen.ventanaEmergente("Ejecución terminada Hilo ID: " + t.threadId());
                 
                 visorImagen.setVisible(false);
                 visorImagen.dispose();
@@ -101,8 +100,13 @@ public class HiloVisor implements ActionListener, Runnable {
         }
     }
 
-    private void iniciarVista() {
-        visorImagen.setTitle("Visor Imagene");
+    public void iniciarVista() {
+        
+        
+        visorImagen.mensajeConsola("Imagen seleccionada: " + gestorImagen.getImagenIndex(indexImg).getRutaImagen() + "\n"
+                                    + "Hilo a ejecutar: " + t.getName());
+        
+        visorImagen.setTitle("Visor Imagenes");
         visorImagen.setVisible(true);
         visorImagen.setLocationRelativeTo(null);
         visorImagen.setDefaultCloseOperation(0);
@@ -110,6 +114,12 @@ public class HiloVisor implements ActionListener, Runnable {
         visorImagen.btnDetener.addActionListener(this);
         visorImagen.btnSalir.addActionListener(this);
         visorImagen.setDefaultCloseOperation(0);
+        
+        t.start();
+    }
+
+    public Thread getHilo() {
+        return t;
     }
 
 }

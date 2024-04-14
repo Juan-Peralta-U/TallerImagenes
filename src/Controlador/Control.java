@@ -29,7 +29,7 @@ public class Control implements ActionListener{
         view.btnBuscar.addActionListener(this);
         view.btnSalir.addActionListener(this);
         iniciarBotonesImagen();
-        view.setTitle("Visor Imagenes");
+        view.setTitle("Catálogo");
         view.setVisible(true);
         view.setLocationRelativeTo(null);
         view.setDefaultCloseOperation(0);
@@ -37,6 +37,10 @@ public class Control implements ActionListener{
 
     private void iniciarBotonesImagen(){
         for(JButton i : view.btnImagenes){
+            if(i.getActionListeners().length > 0) { // No agregar actionlistener otra vez al mismo botón
+                continue;
+            }
+            
             i.addActionListener(this);
         }
     }
@@ -51,6 +55,9 @@ public class Control implements ActionListener{
             int indexBtn = Integer.parseInt(index);
             
             HiloVisor hiloNuevo = new HiloVisor(indexBtn, gestorImagen);
+            view.ventanaEmergente("Imagen seleccionada: " + gestorImagen.getImagenIndex(indexBtn).getRutaImagen() + "\n"
+                                    + "ID del Hilo a ejecutar: " + hiloNuevo.getHilo().threadId());
+            hiloNuevo.iniciarVista();
             
             
             return;
@@ -85,10 +92,6 @@ public class Control implements ActionListener{
 
     public VentanaPrincipal getView() {
         return view;
-    }
-
-    public GestorImagen getGestorImagen() {
-        return gestorImagen;
     }
       
 }
