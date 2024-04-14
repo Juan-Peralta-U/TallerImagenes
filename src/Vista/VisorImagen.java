@@ -20,7 +20,7 @@ public class VisorImagen extends javax.swing.JFrame {
      */
     public VisorImagen() {
         initComponents();
-        setVisible(true);
+        
     }
 
     /**
@@ -39,6 +39,7 @@ public class VisorImagen extends javax.swing.JFrame {
         btnSalir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         barraProgreso.setFont(new java.awt.Font("Dubai Medium", 0, 10)); // NOI18N
         barraProgreso.setForeground(new java.awt.Color(0, 0, 0));
@@ -109,17 +110,15 @@ public class VisorImagen extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
 
-    public void cambiarImagen(String rutaImg, int valorPB){ // valor Progress Bar
+    public void cambiarImagen(ImageIcon img, int valorPB){ // valor Progress Bar
         int tamaño = 500;
         
-        ImageIcon imagen = new ImageIcon(rutaImg);
-        
-        Image imagenEscalada = imagen.getImage().getScaledInstance(tamaño, tamaño, Image.SCALE_SMOOTH);
+        Image imagenEscalada = img.getImage().getScaledInstance(tamaño, tamaño, Image.SCALE_SMOOTH);
 
-        imagen = new ImageIcon(imagenEscalada);
+        img = new ImageIcon(imagenEscalada);
 
         
-        labImagen.setIcon(imagen);   
+        labImagen.setIcon(img); 
         
         barraProgreso.setValue(valorPB);
         labImagen.revalidate();

@@ -14,18 +14,22 @@ public class DirectoryChooser {
 
     private JFileChooser dc;
     
-    //Gran parte del codigo recopilada de la documentacion en oracle y youtube
+    //Gran parte del codigo recopilada de la documentacion en oracle
     public String Directory() {
         dc  = new JFileChooser();
+        
         // Establece el directorio actual del JFileChooser en el directorio actual del usuario.
         dc.setCurrentDirectory(new java.io.File("."));
         dc.setDialogTitle("Seleccione un directorio");
-        //modifica el JFileChooser para que solo permita directorios
+        
+        // Modifica el JFileChooser para que solo permita directorios
         dc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-        //Desabilita el filtro de tipo de archivo
+        
+        // Deshabilita el filtro de tipo de archivo
         dc.setAcceptAllFileFilterUsed(false);
         if (dc.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
-            //Devuelve la ruta del directorio
+            
+            // Devuelve la ruta del directorio
             return dc.getSelectedFile().toString();
         } else {
             

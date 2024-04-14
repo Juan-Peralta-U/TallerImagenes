@@ -8,6 +8,8 @@ import Model.Imagen;
 import Vista.VentanaPrincipal;
 import java.util.ArrayList;
 import java.io.File;
+import java.util.List;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -50,13 +52,9 @@ public class GestorImagen {
         
         int nBotones = control.getView().getBtnImagenes().size();
         
-        for(Imagen i : imagenes){
-
-            if (control.getGestorImagen().getImagenes().indexOf(i) < nBotones){
-                continue;
-                
-            }
-            control.getView().agregarImagen(i.getRutaImagen());
+        for(Imagen i : imagenes.subList(nBotones, imagenes.size())){
+            
+            control.getView().agregarImagen(i.getIcono());
             control.getView().mensajeConsola(i.getRutaImagen());
         }
         
@@ -71,9 +69,9 @@ public class GestorImagen {
         return imagenes;
     }
     
-    public String getImagenIndex(int i){
+    public Imagen getImagenIndex(int i){
         
-        return imagenes.get(i).getRutaImagen();
+        return imagenes.get(i);
     }
 
     int getPorcentaje(int index) {

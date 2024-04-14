@@ -111,13 +111,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public void agregarImagen(String ruta){
+    public void agregarImagen(ImageIcon img){
         int tamaño = 180;
            
-        ImageIcon imagen = new ImageIcon(ruta);
-        Image imagenEscalada = imagen.getImage().getScaledInstance(tamaño, tamaño, Image.SCALE_SMOOTH);
-        imagen = new ImageIcon(imagenEscalada);
-        JButton imageButton= new JButton(imagen);
+        Image imagenEscalada = img.getImage().getScaledInstance(tamaño, tamaño, Image.SCALE_SMOOTH);
+        img = new ImageIcon(imagenEscalada);
+        JButton imageButton= new JButton(img);
         
         imageButton.setActionCommand("BotonImg" + (btnImagenes.size()));
         btnImagenes.add(imageButton);
