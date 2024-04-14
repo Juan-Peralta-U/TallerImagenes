@@ -15,13 +15,21 @@ import java.io.File;
  */
 public class GestorImagen {
     
-    private ArrayList<Imagen> imagenes; 
+    private ArrayList<Imagen> imagenes;
+    private Control control;
 
-    public GestorImagen() {
+    public GestorImagen(Control control) {
+        this.control = control;
         this.imagenes = new ArrayList<>();
     }
     
     public void insertarImagenesRuta(String ruta){
+        
+        if(ruta == null){
+            
+            // No existe carpeta o canceló operación de seleccionar carpeta
+            return;
+        }
         
         for(File file : new File(ruta).listFiles()){
             if(!file.isDirectory()){
@@ -31,18 +39,25 @@ public class GestorImagen {
                 if(dataType.equals("jpg") || dataType.equals("png")){
                     
                     imagenes.add(new Imagen(file.getAbsolutePath()));
-                    
+
                 }
             }
         }
         
     }
     
-    public void cargarImagenes(VentanaPrincipal vista){
+    public void cargarImagenes(){
+        
+        int nBotones = control.getView().getBtnImagenes().size();
         
         for(Imagen i : imagenes){
-            vista.agregarImagen(i.getRutaImagen());
-            System.out.println(i.getRutaImagen());
+
+            if (control.getGestorImagen().getImagenes().indexOf(i) < nBotones){
+                continue;
+                
+            }
+            control.getView().agregarImagen(i.getRutaImagen());
+            control.getView().mensajeConsola(i.getRutaImagen());
         }
         
     }
@@ -50,6 +65,10 @@ public class GestorImagen {
     
     public int getSize(){
         return imagenes.size();
+    }
+
+    public ArrayList<Imagen> getImagenes() {
+        return imagenes;
     }
     
     public String getImagenIndex(int i){
@@ -59,8 +78,7 @@ public class GestorImagen {
 
     int getPorcentaje(int index) {
         
-       return ((100 / imagenes.size()) * (index + 1));
-       
+        return (int)((100 / (double)imagenes.size()) * (index + 1)); // Obtiene porcentaje 
     }
     
     

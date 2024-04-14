@@ -20,7 +20,7 @@ public class Control implements ActionListener{
     private GestorImagen gestorImagen;
 
     public Control() {
-        gestorImagen = new GestorImagen();
+        gestorImagen = new GestorImagen(this);
         view = new VentanaPrincipal();        
         iniciarVista();
     }
@@ -49,8 +49,9 @@ public class Control implements ActionListener{
             String index = e.getActionCommand().substring(8);
             
             int indexBtn = Integer.parseInt(index);
-             
+            
             HiloVisor hiloNuevo = new HiloVisor(indexBtn, gestorImagen);
+            
             
             return;
         }
@@ -60,10 +61,10 @@ public class Control implements ActionListener{
             case "buscarDirectorioBtn" ->{
                 
                 String directorio = new DirectoryChooser().Directory();
-       
+                
                 gestorImagen.insertarImagenesRuta(directorio);
                 
-                gestorImagen.cargarImagenes(view);
+                gestorImagen.cargarImagenes();
                 
                 iniciarBotonesImagen();
                 
@@ -80,6 +81,14 @@ public class Control implements ActionListener{
        }
         
         
+    }
+
+    public VentanaPrincipal getView() {
+        return view;
+    }
+
+    public GestorImagen getGestorImagen() {
+        return gestorImagen;
     }
       
 }

@@ -137,6 +137,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     public void ventanaEmergente(String m){
         JOptionPane.showMessageDialog(null, m);
     }
+
+    public ArrayList<JButton> getBtnImagenes() {
+        return btnImagenes;
+    }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnBuscar;
