@@ -60,15 +60,21 @@ public class HiloVisor implements ActionListener, Runnable {
 
     private void cambiarImagen() {
         int progressBar = gestorImagen.getPorcentaje(indexImg);
+        
         Imagen img = gestorImagen.getImagenIndex(indexImg);
+        
         visorImagen.cambiarImagen(img.getIcono(), progressBar);
+        
+        // Se actualiza el valor del próximo indice
         indexImg = (indexImg < gestorImagen.getSize() - 1) ? indexImg + 1 : 0;
+        
         visorImagen.mensajeConsola(img.getRutaImagen());
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         
+        // Manejo de eventos
         switch (e.getActionCommand()) {
             case "detenerBtn":
                 

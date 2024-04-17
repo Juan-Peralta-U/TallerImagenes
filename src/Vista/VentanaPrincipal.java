@@ -25,6 +25,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     public ArrayList<JButton> btnImagenes;
     
     public VentanaPrincipal() {
+        
+        // Se instancia un arrayList para guardar los botones que contienen imágenes
         btnImagenes = new ArrayList<JButton>();
         
         initComponents();
@@ -113,18 +115,18 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     public void agregarImagen(ImageIcon img){
         int tamaño = 180;
-           
+        
+        // La imagen se escala al tamaño deseado
         Image imagenEscalada = img.getImage().getScaledInstance(tamaño, tamaño, Image.SCALE_SMOOTH);
         img = new ImageIcon(imagenEscalada);
         JButton imageButton= new JButton(img);
         
+        // Para el manejo de eventos, se agrega un actioncCommand a cada botón
         imageButton.setActionCommand("BotonImg" + (btnImagenes.size()));
         btnImagenes.add(imageButton);
         
         imgPanel.add(imageButton);
-        
         imgPanel.revalidate();
-        
         imgPanel.repaint();
         
     }

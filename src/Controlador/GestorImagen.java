@@ -33,6 +33,7 @@ public class GestorImagen {
             return;
         }
         
+        // Se seleccionan todos los archivos de la carpeta con extension jpg o png
         for(File file : new File(ruta).listFiles()){
             if(!file.isDirectory()){
                 
@@ -52,6 +53,7 @@ public class GestorImagen {
         
         int nBotones = control.getView().getBtnImagenes().size();
         
+        // Agrega solo las imágenes que aún no están regsitradas en los botones
         for(Imagen i : imagenes.subList(nBotones, imagenes.size())){
             
             control.getView().agregarImagen(i.getIcono());

@@ -26,8 +26,11 @@ public class Control implements ActionListener{
     }
     
     private void iniciarVista(){
+        
+        //Método para inicialización de vista de catálogo
         view.btnBuscar.addActionListener(this);
         view.btnSalir.addActionListener(this);
+        
         iniciarBotonesImagen();
         view.setTitle("Catálogo");
         view.setVisible(true);
@@ -48,6 +51,7 @@ public class Control implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
 
+        // Se obtiene ActionCommand que se definió anteriormente para los botones con imágenes
         if(e.getActionCommand().startsWith("BotonImg")){
             
             String index = e.getActionCommand().substring(8);
@@ -63,7 +67,7 @@ public class Control implements ActionListener{
             return;
         }
         
-        
+        // Manejo de eventos buscar y salir
         switch(e.getActionCommand()){
             case "buscarDirectorioBtn" ->{
                 

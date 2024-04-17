@@ -113,13 +113,14 @@ public class VisorImagen extends javax.swing.JFrame {
     public void cambiarImagen(ImageIcon img, int valorPB){ // valor Progress Bar
         int tamaño = 500;
         
+        // Se esacala la imagen al tamaño deseado
         Image imagenEscalada = img.getImage().getScaledInstance(tamaño, tamaño, Image.SCALE_SMOOTH);
 
         img = new ImageIcon(imagenEscalada);
-
         
         labImagen.setIcon(img); 
         
+        // Se cambia el progreso de la barra de progreso
         barraProgreso.setValue(valorPB);
         labImagen.revalidate();
         labImagen.repaint();
